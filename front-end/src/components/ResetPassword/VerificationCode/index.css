@@ -1,14 +1,6 @@
-.login{
+.form{
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.container{
-    text-align: center;
-}
-
-.form-group, .button-group{
-    display: flex;
     flex-direction: column;
 }
