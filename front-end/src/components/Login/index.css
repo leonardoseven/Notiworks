@@ -1,0 +1,17 @@
+.login{
+    max-width: 400px;
+    align-items: center;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+
+}
