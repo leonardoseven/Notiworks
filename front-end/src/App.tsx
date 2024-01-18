@@ -6,6 +6,7 @@ import SendEmailPassword from './components/ResetPassword/SendEmailPassword'
 import VerificationCode from './components/ResetPassword/VerificationCode'
 import ResetPassword from './components/ResetPassword'
 import SuccessResetPassword from './components/ResetPassword/SuccessResetPassword'
+import Home from './components/Home'
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/verificationcode" element={<VerificationCode/>} ></Route>
             <Route path="/resetpassword" element={<ResetPassword/>} ></Route>
             <Route path="/successresetpassword" element={<SuccessResetPassword/>} ></Route>
+            <Route path="/home" element={<Home/>} ></Route>
         </Routes>
       </div>
     </>
