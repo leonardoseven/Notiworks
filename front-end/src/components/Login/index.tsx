@@ -1,9 +1,8 @@
 import Footer from '../ResetPassword/Footer'
-import Header from '../ResetPassword/Header'
 import './index.css'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { useState,createContext, useContext  } from 'react'
+import { useState } from 'react'
 
 const Login = () =>{
 
@@ -19,6 +18,7 @@ const Login = () =>{
           .then(function (response) {
             setEmail("")
             setPassword("")
+            localStorage.setItem("token", response.data)
             window.location.href = "/home";
           })
           .catch(function (error) {
@@ -28,26 +28,28 @@ const Login = () =>{
 
     return(
         <>
-            <Header/>      
+            <h1 className='title'>Notiworks</h1>
             <div className="login">
                 <div className="container">
                     <h3>Login</h3>
                     <form  onSubmit={salvar}>
                         <div className="form-group" >
-                            <label>Usuário:</label>
+                            <label className='label' >Usuário:</label>
                             <input onChange={(e) => setEmail(e.target.value)} type="email" value={email}  placeholder='user@email.com'/>
                         </div>
                         <div className="form-group">
-                            <label>Senha:</label>
+                            <label className='label'>Senha:</label>
                             <input onChange={(e) => setPassword(e.target.value)} type="password" value={password} />
                         </div>
-                        <Link to="/sendemailpassword">Esqueci minha senha</Link>
-                        <button>Entrar</button>
+                        <Link to="/sendemailpassword" className='btn-esqueci-senha'>Esqueci minha senha</Link>
+                        <div>
+                            <button className='btn-entrar btn-margin'>Entrar</button>
+                        </div>
                     </form>
                     <div className="button-group">
-                        <button>Acessar com Google</button>
-                        <button>Acessar com Microsoft</button>
-                        <button>Seu primeiro acesso? Crie uma conta!</button>
+                        <button className='btn-bottom'>Acessar com Google</button>
+                        <button className='btn-bottom'>Acessar com Microsoft</button>
+                        <button className='btn-bottom'>Seu primeiro acesso? Crie uma conta!</button>
                     </div>
                 </div>
             </div>

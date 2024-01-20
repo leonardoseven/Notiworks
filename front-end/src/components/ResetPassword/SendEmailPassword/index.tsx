@@ -1,13 +1,26 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import Header from "../Header";
 import Footer from "../Footer";
-
+import axios from 'axios'
 
 const SendEmailPassword = () =>{
     
+    const [email, setEmail] = useState('');
+
+
     const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        window.location.href="/verificationcode"
+
+        axios.get('http://localhost/api/v1/recovery/password/send/pin?email='+email)
+          .then(function (response) {
+            localStorage.setItem("pin",response.data.pin);
+            localStorage.setItem("emailPinCode",response.data.email);
+            window.location.href = "/verificationcode";
+          })
+          .catch(function (error) {
+            console.log(error.message);
+          });
     }
 
     return(
@@ -19,7 +32,7 @@ const SendEmailPassword = () =>{
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label>E-mail</label>
-                        <input type="email" placeholder="exemple@exemple.com"></input>
+                        <input onChange={(e)=>setEmail(e.target.value)} type="email" placeholder="exemple@exemple.com"></input>
                     </div>
                     <button type="submit">Enviar código por e-mail</button>
                 </form>

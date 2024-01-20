@@ -1,0 +1,13 @@
+.container-recent-card{
+    border: 1px solid #BBB;
+    border-radius: 5px;
+    width: 380px;
+    padding: 10px;
+    word-wrap: break-word;
+    background-color: #FFF;
+}
+
+.container-recent-card p {
+    margin: 0px;
+    padding: 0px;
+}

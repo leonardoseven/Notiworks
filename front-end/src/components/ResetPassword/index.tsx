@@ -4,6 +4,8 @@ import Footer from "./Footer";
 
 const ResetPassword = () =>{
 
+
+
     const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         window.location.href="/successresetpassword"

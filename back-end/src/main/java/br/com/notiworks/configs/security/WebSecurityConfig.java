@@ -31,8 +31,11 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 		http
+			.httpBasic().and()
 			.csrf().disable()
-			.authorizeRequests().requestMatchers("/api/v1/auth/**").permitAll()
+			.authorizeRequests()
+			.requestMatchers("/api/v1/auth/**").permitAll()
+			.requestMatchers("/api/v1/recovery/password/**").permitAll()
 			.anyRequest()
 			.authenticated()
 			.and()

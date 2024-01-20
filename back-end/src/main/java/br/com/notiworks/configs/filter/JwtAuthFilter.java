@@ -1,12 +1,14 @@
 package br.com.notiworks.configs.filter;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -45,12 +47,17 @@ public class JwtAuthFilter  extends OncePerRequestFilter{
 			UserDetails user = userService.loadUserByUsername(userEmail);
 			
 			if(jwtUtil.validateToken(jwtToken, user)) {
-				UsernamePasswordAuthenticationToken authToken = 
-						new UsernamePasswordAuthenticationToken(user, user.getAuthorities());
-				authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-				SecurityContextHolder.getContext().setAuthentication(authToken);
+//				UsernamePasswordAuthenticationToken authToken = 
+//						new UsernamePasswordAuthenticationToken(user, user.getAuthorities());
+//				authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+//				SecurityContextHolder.getContext().setAuthentication(authToken);
+				
+				GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_ADMIN");
+		        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, jwtToken, Arrays.asList(authority));
+		        SecurityContextHolder.getContext().setAuthentication(auth);
 			}
 		}
+		
 		filterChain.doFilter(request, response);
 	}
 

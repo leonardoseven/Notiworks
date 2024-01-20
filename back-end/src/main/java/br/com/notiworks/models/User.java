@@ -2,9 +2,13 @@ package br.com.notiworks.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
@@ -66,7 +70,10 @@ public class User implements Serializable, UserDetails{
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_ADMIN");
+		List<SimpleGrantedAuthority> updatedAuthorities = new ArrayList<SimpleGrantedAuthority>();
+		updatedAuthorities.add(authority);
+		return updatedAuthorities;
 	}
 
 	@Override

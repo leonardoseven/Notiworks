@@ -1,12 +1,14 @@
 import LeftBar from "../LeftBar/Index"
-
+import './index.css'
 
 const Contatos = () =>{
 
     return(
         <>
-            <LeftBar activeIcon="contatos"></LeftBar>
-            <h1>Contatos</h1>
+            <div className="container-contatos">
+                <LeftBar activeIcon="contatos"></LeftBar>
+                <h1>Contatos</h1>
+            </div>
         </>
     )
 }
