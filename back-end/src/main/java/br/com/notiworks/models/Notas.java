@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,4 +39,7 @@ public class Notas {
 	@Column(name="data_atualizacao", nullable = false)
 	private LocalDateTime data_atualizacao;
 	
+	
+	@Transient
+	private String data_atualizacao_formated;
 }

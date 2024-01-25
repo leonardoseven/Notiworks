@@ -28,6 +28,17 @@ const handleLogin =  (userAuthenticated: UserAuthenticated) =>{
     sessionStorage.setItem(NAME, userAuthenticated.name || '')
 }
 
+const publicPaths = ["sendemailpassword", "verificationcode","resetpassword","successresetpassword","createuser","userEmailValidation"];
+
+const validatePublicPaths = () =>{
+    const currentPath = window.location.href.split('/')[window.location.href.split('/').length -1]
+    const size = publicPaths.filter( (x) => x === currentPath);
+    if(size.length = 0)
+        return false;
+    return true
+
+}
+
 const AuthProvider = ({children} : Props) => {
     const [userAuthenticated, setUserAuthenticated] = useState(initialValue.userAuthenticated)
     const navigate = useNavigate()
@@ -43,8 +54,10 @@ const AuthProvider = ({children} : Props) => {
                 username: username
             })
         }else{
-            setUserAuthenticated(initialValue.userAuthenticated)
-            navigate('/login')
+            if(!validatePublicPaths()){
+                setUserAuthenticated(initialValue.userAuthenticated)
+                navigate('/login')
+            }
         }
         console.log('userAuth', userAuthenticated)
     },[navigate])

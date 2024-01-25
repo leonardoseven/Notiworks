@@ -36,6 +36,18 @@ const Login = () =>{
           });
     }
 
+    const handlePopUp = (message : string) =>{
+        enqueueSnackbar(message,{variant: 'warning', anchorOrigin: {
+            vertical: "top",
+            horizontal: "center",
+          }});
+    }
+
+    const handleCreateUser = () =>{
+        navigate('/createuser')
+    }
+
+
     return(
         <>
             <h1 className='title'>Notiworks</h1>
@@ -57,9 +69,9 @@ const Login = () =>{
                         </div>
                     </form>
                     <div className="button-group">
-                        <button className='btn-bottom'>Acessar com Google</button>
-                        <button className='btn-bottom'>Acessar com Microsoft</button>
-                        <button className='btn-bottom'>Seu primeiro acesso? Crie uma conta!</button>
+                        <button className='btn-bottom' onClick={() => handlePopUp("Em desenvolvimento")}>Acessar com Google</button>
+                        <button className='btn-bottom' onClick={() => handlePopUp("Em desenvolvimento")}>Acessar com Microsoft</button>
+                        <button className='btn-bottom' onClick={handleCreateUser}>Seu primeiro acesso? Crie uma conta!</button>
                     </div>
                 </div>
             </div>

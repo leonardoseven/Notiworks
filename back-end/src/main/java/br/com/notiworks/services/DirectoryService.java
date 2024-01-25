@@ -1,11 +1,13 @@
 package br.com.notiworks.services;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import br.com.notiworks.dao.DirectoryDAO;
 import br.com.notiworks.dto.DirectoryDTO;
 import br.com.notiworks.dto.DirectoryListDTO;
 import br.com.notiworks.models.Directory;
@@ -17,6 +19,9 @@ public class DirectoryService {
 	
 	@Autowired
 	private IDirectoryRepository directoryRepository;
+	
+	@Autowired
+	private DirectoryDAO directoryDAO;
 	
 	@Autowired
 	private DirectoryXNotasService directoryXNotasService;
@@ -49,9 +54,8 @@ public class DirectoryService {
 	     return saveDirectory;
 	}
 
-	public DirectoryListDTO listAll() {
-		
-		return null;
+	public List<DirectoryListDTO> listAll() {
+		return directoryDAO.getDirectorysByUserId();
 	}
 	
 }

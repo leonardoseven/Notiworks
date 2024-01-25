@@ -10,21 +10,22 @@ import './index.css'
 import { Box, Button } from '@mui/material';
 import { Logout } from '@mui/icons-material';
 import { AuthContext, handleLogout } from '../../context/AuthProvider';
+import { useContext } from 'react';
 interface IProps {
     activeIcon: string
  }
 
 const LeftBar : React.FC<IProps>= ({activeIcon}) =>{
 
-    const userAuthenticated = AuthContext.Provider;
+    const {userAuthenticated} = useContext(AuthContext);
 
     return(
         <>
             <div className='container-left-bar'>
                 <div className='sub-container-left-bar'>
                     <div className='profile-avatar'>
-                        <Avatar alt="googlenpm run dev" src="https://i.pinimg.com/originals/1d/4d/69/1d4d69c694c8ba1034c0e9552f457ecf.jpg" /> 
-                        <span>`userAuthenticated.name`</span>
+                        <Avatar className="avatar-left-bar" alt="googlenpm run dev" src="https://i.pinimg.com/originals/1d/4d/69/1d4d69c694c8ba1034c0e9552f457ecf.jpg" /> 
+                        <span>{userAuthenticated.name}</span>
                     </div>
 
                     <nav>

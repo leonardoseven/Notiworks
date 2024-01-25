@@ -1,0 +1,31 @@
+.container-reset-senha{
+    text-align: center;
+}
+
+.form-group-reset-senha{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-group-reset-senha input{
+    line-height: 25px;
+    border-radius: 4px;
+    border: 1px solid #BBBBBB;
+    padding: 8px;
+    width: 300px;
+    margin-bottom: 30px;
+    margin-top: 15px;
+}
+
+.btn-bottom{
+    margin-bottom: 20px;
+    line-height: 25px;
+    border-radius: 8px;
+}
+
+.container-reset-senha a{
+    border: 1px solid #BBB;
+    padding: 8px;
+}

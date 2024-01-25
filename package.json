@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "material-ui-snackbar-provider": "^2.0.0",
+    "navigate": "^0.3.6",
+    "notistack": "^3.0.1",
+    "react-navigation": "^5.0.0"
+  }
+}

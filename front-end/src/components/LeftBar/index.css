@@ -15,9 +15,13 @@ a{
     margin: 5px;
 }
 
+.avatar-left-bar{
+    margin-right: 15px;
+}
+
 .profile-avatar{
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
     margin-bottom: 10px;
 }

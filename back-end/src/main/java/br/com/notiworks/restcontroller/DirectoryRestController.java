@@ -1,5 +1,7 @@
 package br.com.notiworks.restcontroller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.notiworks.dto.DirectoryDTO;
+import br.com.notiworks.dto.DirectoryListDTO;
 import br.com.notiworks.services.DirectoryService;
 
 @CrossOrigin("http://localhost:5173")
@@ -29,9 +32,9 @@ public class DirectoryRestController {
 	}
 	
 	@GetMapping("/list-all")
-	private ResponseEntity<?> listAll(){
-		directoryService.listAll();
-		return null;
+	private ResponseEntity<List<DirectoryListDTO>> listAll(){
+		List<DirectoryListDTO> listAll = directoryService.listAll();
+		return new ResponseEntity<List<DirectoryListDTO>>(listAll, HttpStatus.OK);
 	}
 	
 }

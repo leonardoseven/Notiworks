@@ -16,6 +16,8 @@ import Ajuda from './components/Ajuda'
 import Configuracoes from './components/Configuracoes'
 import { AuthProvider } from './context/AuthProvider'
 import { SnackbarProvider } from 'notistack'
+import CreateUser from './components/CreateUser'
+import EmailUserValidation from './components/CreateUser/EmailUserValidation'
 function App() {
 
   return (
@@ -30,6 +32,8 @@ function App() {
                 <Route path="/verificationcode" element={<VerificationCode/>} ></Route>
                 <Route path="/resetpassword" element={<ResetPassword/>} ></Route>
                 <Route path="/successresetpassword" element={<SuccessResetPassword/>} ></Route>
+                <Route path="/createuser" element={<CreateUser/>} ></Route>
+                <Route path="/userEmailValidation" element={<EmailUserValidation/>} ></Route>
                 <Route path="/editor" element={<Editor/>} ></Route>
                 <Route path="/contatos" element={<Contatos/>} ></Route>
                 <Route path="/lembretes" element={<Lembretes/>} ></Route>

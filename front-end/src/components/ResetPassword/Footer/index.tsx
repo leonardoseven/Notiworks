@@ -1,3 +1,4 @@
+import './index.css'
 
 const Footer = () =>{
 
@@ -6,7 +7,7 @@ const Footer = () =>{
     }
 
     return(
-        <div className="container">
+        <div className="container-footer">
             <p>Notiworks© {getYear()} - Todos os direitos reservados</p>
         </div>
     )
