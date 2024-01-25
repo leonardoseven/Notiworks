@@ -14,26 +14,31 @@ import Contatos from './components/Contatos'
 import Lembretes from './components/Lembretes'
 import Ajuda from './components/Ajuda'
 import Configuracoes from './components/Configuracoes'
-
-
+import { AuthProvider } from './context/AuthProvider'
+import { SnackbarProvider } from 'notistack'
 function App() {
+
   return (
     <>
-      <div className="app">
-        <Routes>
-            <Route path="/" element={<Login/>} ></Route>
-            <Route path="/sendemailpassword" element={<SendEmailPassword/>} ></Route>
-            <Route path="/verificationcode" element={<VerificationCode/>} ></Route>
-            <Route path="/resetpassword" element={<ResetPassword/>} ></Route>
-            <Route path="/successresetpassword" element={<SuccessResetPassword/>} ></Route>
-            <Route path="/home" element={<Home/>} ></Route>
-            <Route path="/editor" element={<Editor/>} ></Route>
-            <Route path="/contatos" element={<Contatos/>} ></Route>
-            <Route path="/lembretes" element={<Lembretes/>} ></Route>
-            <Route path="/ajuda" element={<Ajuda/>} ></Route>
-            <Route path="/configuracoes" element={<Configuracoes/>} ></Route>
-        </Routes>
-      </div>
+     <AuthProvider>
+      <SnackbarProvider maxSnack={3}>
+          <Routes>
+              <Route path="/login" element={<Login/>} ></Route>
+                <Route path="/" element={<Home/>} ></Route>
+                <Route path="/home" element={<Home/>} ></Route>
+                <Route path="/sendemailpassword" element={<SendEmailPassword/>} ></Route>
+                <Route path="/verificationcode" element={<VerificationCode/>} ></Route>
+                <Route path="/resetpassword" element={<ResetPassword/>} ></Route>
+                <Route path="/successresetpassword" element={<SuccessResetPassword/>} ></Route>
+                <Route path="/editor" element={<Editor/>} ></Route>
+                <Route path="/contatos" element={<Contatos/>} ></Route>
+                <Route path="/lembretes" element={<Lembretes/>} ></Route>
+                <Route path="/ajuda" element={<Ajuda/>} ></Route>
+                <Route path="/configuracoes" element={<Configuracoes/>} ></Route>
+          </Routes>
+        </SnackbarProvider>
+      </AuthProvider>
+        
     </>
   )
 }

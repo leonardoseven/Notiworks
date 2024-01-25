@@ -1,10 +1,15 @@
 import Footer from '../ResetPassword/Footer'
 import './index.css'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useState } from 'react'
+import { useSnackbar } from "notistack";
+import { handleLogin } from '../../context/AuthProvider'
 
 const Login = () =>{
+
+    const { enqueueSnackbar } = useSnackbar();
+    const navigate = useNavigate()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -18,11 +23,16 @@ const Login = () =>{
           .then(function (response) {
             setEmail("")
             setPassword("")
-            sessionStorage.setItem("token", response.data)
-            window.location.href = "/home";
+            handleLogin({token: response.data.token, isAuthenticated: true, username: response.data.username, name: response.data.name })
+            //TODO salvar todos os dados do usuário
+            navigate('/home')
           })
           .catch(function (error) {
             console.log(error.response.data);
+            enqueueSnackbar(error.response.data.erroMsg,{variant: 'error', anchorOrigin: {
+                vertical: "top",
+                horizontal: "center",
+              }});
           });
     }
 

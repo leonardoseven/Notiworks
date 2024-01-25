@@ -7,12 +7,16 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Link } from 'react-router-dom'
 import './index.css'
-
+import { Box, Button } from '@mui/material';
+import { Logout } from '@mui/icons-material';
+import { AuthContext, handleLogout } from '../../context/AuthProvider';
 interface IProps {
     activeIcon: string
  }
 
 const LeftBar : React.FC<IProps>= ({activeIcon}) =>{
+
+    const userAuthenticated = AuthContext.Provider;
 
     return(
         <>
@@ -20,7 +24,7 @@ const LeftBar : React.FC<IProps>= ({activeIcon}) =>{
                 <div className='sub-container-left-bar'>
                     <div className='profile-avatar'>
                         <Avatar alt="googlenpm run dev" src="https://i.pinimg.com/originals/1d/4d/69/1d4d69c694c8ba1034c0e9552f457ecf.jpg" /> 
-                        <span>Leonardo dos Santos</span>
+                        <span>`userAuthenticated.name`</span>
                     </div>
 
                     <nav>
@@ -71,7 +75,16 @@ const LeftBar : React.FC<IProps>= ({activeIcon}) =>{
                             </div>
                         </div>
                     </div>
-
+                    <Box>
+                            
+                            <Button 
+                                variant={'contained'}
+                                startIcon={<Logout/>}
+                                onClick={()=>handleLogout()}
+                            >
+                                Logout
+                            </Button>
+                        </Box>
 
                 </div>
                 
