@@ -1,0 +1,18 @@
+/* index.css */
+.container-configuracoes {
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .container-content {
+    display: flex;
+    
+  }
+  
+  .h1-configuration{
+    flex-grow: 1;
+    margin-left: 250px; 
+    margin-top: 68px; 
+  }
+  
