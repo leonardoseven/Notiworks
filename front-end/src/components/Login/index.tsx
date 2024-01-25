@@ -18,7 +18,7 @@ const Login = () =>{
           .then(function (response) {
             setEmail("")
             setPassword("")
-            localStorage.setItem("token", response.data)
+            sessionStorage.setItem("token", response.data)
             window.location.href = "/home";
           })
           .catch(function (error) {

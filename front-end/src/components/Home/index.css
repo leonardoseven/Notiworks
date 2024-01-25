@@ -142,10 +142,11 @@
     color: #444444;
 }
 
-.input-nome-da-nota input{
+.input-nome-da-nota input, .input-pesquisar input{
     line-height: 20px;
     width: 98%;
     border: 1px solid #BBB;
     border-radius: 4px;
     padding: 8px;
 }
+

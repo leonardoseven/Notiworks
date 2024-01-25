@@ -6,6 +6,8 @@ import Modal from '@mui/material/Modal';
 import RecentCard from "./RecentCard";
 import Directory from "./Directory";
 import { useState } from 'react'
+import axios from 'axios';
+import Alert from '@mui/material/Alert';
 import './index.css'
 
 const style = {
@@ -24,9 +26,38 @@ const style = {
 
 const Home = () =>{
 
+    //modal
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+
+    //criar nota
+    const [nota, setNota] = useState('')
+    const [modalPesquisa, setModalPesquisa] = useState('')
+
+
+    const salvarNota = (e : any) =>{
+        e.preventDefault()
+
+        let config = {
+            headers: {
+              "Content-Type": "application/json",
+              'Authorization':`Bearer ${sessionStorage.getItem("token")}`
+              }
+            }
+        axios.post('http://localhost/api/v1/notas/save', {titulo:nota, directoryName:modalPesquisa, directoryId:''}, config)
+        .then((response)=>{
+            setNota('');
+            setModalPesquisa('');
+            setOpen(false);
+            alert("salvo")
+        })
+        .catch((error)=>{
+            alert("error")
+        })
+    }
+
 
     return(
         <>
@@ -67,14 +98,19 @@ const Home = () =>{
                                         <div className="container-nova-nota">
                                             <div className="input-nome-da-nota">
                                                 <h5>Nome da nota</h5>
-                                                <input type="text" placeholder="Nome da nota"></input>
+                                                <input onChange={(e)=>{setNota(e.target.value)}} type="text"  required  placeholder="Nome da nota"></input>
                                             </div>
 
-                                            <div className="">
+                                            <div className="input-pesquisar">
                                                 <h3>Salve nota em</h3>
-                                                <input type="text" placeholder="Nome da nota"></input>
+                                                <input onChange={(e)=>{setModalPesquisa(e.target.value)}} type="text" placeholder="Pesquisar"></input>
                                             </div>
-                                               
+
+                                            <div className="moda-container-directorys">
+                                                <Directory />
+                                                <Directory />
+                                                <Directory />
+                                            </div> 
                                                 
 
                                                 
@@ -83,7 +119,7 @@ const Home = () =>{
                                     <div className="container-modal-footer">
                                         <div>
                                             <button onClick={handleClose}>Cancelar</button>
-                                            <button >Criar nota</button>
+                                            <button onClick={salvarNota}>Criar nota</button>
                                         </div>
                                     </div>
                                 </Box>
