@@ -16,7 +16,7 @@ import br.com.notiworks.dto.AuthenticationRequest;
 import br.com.notiworks.dto.TokenDTO;
 import br.com.notiworks.services.UserService;
 
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthenticationController {

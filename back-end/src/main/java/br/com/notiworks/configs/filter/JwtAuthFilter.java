@@ -12,7 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import br.com.notiworks.configs.security.UsuarioLogado;
 import br.com.notiworks.configs.utils.JwtUtil;
+import br.com.notiworks.models.User;
 import br.com.notiworks.services.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -29,6 +31,9 @@ public class JwtAuthFilter  extends OncePerRequestFilter{
 	
 	@Autowired
 	private JwtUtil jwtUtil;
+	
+	@Autowired
+	private UsuarioLogado usuarioLogado;
 	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -55,6 +60,12 @@ public class JwtAuthFilter  extends OncePerRequestFilter{
 				GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_ADMIN");
 		        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, jwtToken, Arrays.asList(authority));
 		        SecurityContextHolder.getContext().setAuthentication(auth);
+		        if(usuarioLogado.getId() == null) {
+		        	User u = userService.findByUsername(userEmail);
+		        	usuarioLogado.setId(u.getId());
+		        	usuarioLogado.setUsername(u.getUsername());
+		        }
+		        
 			}
 		}
 		
