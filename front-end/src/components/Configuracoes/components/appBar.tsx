@@ -9,7 +9,7 @@ const StyledTypography = styled(Typography)({
 const AppBarConfiguration = () => {
   return (
     <div>
-      <AppBar className="app-bar1" color="default" position='fixed'>
+      <AppBar className="app-bar1" color="default" position='fixed' >
         <Toolbar>
           <StyledTypography variant="h6">
             Configurações
