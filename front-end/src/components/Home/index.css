@@ -112,15 +112,6 @@
     margin-right: 20px;
 }
 
-.container-directorys{
-    background-color: white;
-    margin-left: 20px;
-    margin-right: 20px;
-    border: 1px solid #BBB;
-    border-radius: 5px;
-}
-
-
 .container-modal-footer{
     display: flex;
     justify-content: end;
@@ -150,3 +141,7 @@
     padding: 8px;
 }
 
+.container-directory-notas{
+    max-height: 495px;
+    overflow: scroll;
+}

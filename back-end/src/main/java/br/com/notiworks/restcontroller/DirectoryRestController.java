@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.notiworks.dto.DirectoryDTO;
 import br.com.notiworks.dto.DirectoryListDTO;
+import br.com.notiworks.dto.HomeListDTO;
 import br.com.notiworks.services.DirectoryService;
 
 @CrossOrigin("http://localhost:5173")
@@ -32,9 +33,9 @@ public class DirectoryRestController {
 	}
 	
 	@GetMapping("/list-all")
-	private ResponseEntity<List<DirectoryListDTO>> listAll(){
-		List<DirectoryListDTO> listAll = directoryService.listAll();
-		return new ResponseEntity<List<DirectoryListDTO>>(listAll, HttpStatus.OK);
+	private ResponseEntity<HomeListDTO> listAll(){
+		HomeListDTO listAll = directoryService.listAll();
+		return new ResponseEntity<HomeListDTO>(listAll, HttpStatus.OK);
 	}
 	
 }

@@ -5,9 +5,11 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import RecentCard from "./RecentCard";
 import Directory from "./Directory";
-import { useState } from 'react'
+import Notas from "./Notas";
+import { useEffect, useState } from 'react'
 import axios from 'axios';
-import Alert from '@mui/material/Alert';
+import FolderIcon from "@mui/icons-material/Folder";
+import DescriptionIcon from '@mui/icons-material/Description';
 import './index.css'
 
 const style = {
@@ -24,6 +26,13 @@ const style = {
   };
 
 
+export type ListObject = {
+    id : number
+    nome: string
+    dtAtualizacao : string
+}
+
+
 const Home = () =>{
 
     //modal
@@ -31,10 +40,40 @@ const Home = () =>{
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-
     //criar nota
     const [nota, setNota] = useState('')
     const [modalPesquisa, setModalPesquisa] = useState('')
+
+    const [listDirectory, setListDirectory] = useState([])
+    const [listNotas, setListNotas] = useState([])
+
+
+    const listAllDirectory = () =>{
+        let config = {
+            headers: {
+              "Content-Type": "application/json",
+              'Authorization':`Bearer ${sessionStorage.getItem("token")}`
+              }
+            }
+        axios.get('http://localhost/api/v1/directory/list-all',config)
+        .then((response)=>{
+            setListNotas(response.data.listNotas)
+            setListDirectory(response.data.listDirectory)
+            console.log(response)
+        })
+        .catch((error)=>{
+            alert("error")
+        })
+    }
+
+
+    useEffect(()=>{
+        listAllDirectory();
+    },[])
+
+
+
+
 
 
     const salvarNota = (e : any) =>{
@@ -51,12 +90,17 @@ const Home = () =>{
             setNota('');
             setModalPesquisa('');
             setOpen(false);
+            listAllDirectory();
             alert("salvo")
         })
         .catch((error)=>{
             alert("error")
         })
     }
+
+   
+
+
 
 
     return(
@@ -107,9 +151,9 @@ const Home = () =>{
                                             </div>
 
                                             <div className="moda-container-directorys">
-                                                <Directory />
-                                                <Directory />
-                                                <Directory />
+                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>}/>
+                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>}/>
+                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>}/>
                                             </div> 
                                                 
 
@@ -145,14 +189,9 @@ const Home = () =>{
                             <h4>Nome</h4>
                             <h4>Última alteração</h4>
                         </div>
-                        <div className="container-directorys">
-                            <Directory />
-                            <Directory />
-                            <Directory />
-                            <Directory />
-                            <Directory />
-                            <Directory />
-                            <Directory />
+                        <div className="container-directory-notas">
+                            <Directory list={listDirectory} icon={<FolderIcon fontSize="small"/>}/>
+                            <Notas list={listNotas} icon={<DescriptionIcon fontSize="small"/>}/>
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,8 @@ import org.springframework.util.StringUtils;
 
 import br.com.notiworks.dao.DirectoryDAO;
 import br.com.notiworks.dto.DirectoryDTO;
-import br.com.notiworks.dto.DirectoryListDTO;
+import br.com.notiworks.dto.HomeListDTO;
+import br.com.notiworks.dto.NotasDTO;
 import br.com.notiworks.models.Directory;
 import br.com.notiworks.repository.IDirectoryRepository;
 
@@ -25,6 +26,9 @@ public class DirectoryService {
 	
 	@Autowired
 	private DirectoryXNotasService directoryXNotasService;
+	
+	@Autowired
+	private NotasService notasService;
 
 	public Directory saveDirectory(DirectoryDTO dto) {
 		if(!StringUtils.isEmpty(dto.getNome()) || !StringUtils.isEmpty(dto.getId())) {
@@ -54,8 +58,14 @@ public class DirectoryService {
 	     return saveDirectory;
 	}
 
-	public List<DirectoryListDTO> listAll() {
-		return directoryDAO.getDirectorysByUserId();
+	public HomeListDTO listAll() {
+		List<DirectoryDTO> listDirectory = directoryDAO.findByUserIdWherePaiIdIsNull();
+		List<NotasDTO> listNotas = notasService.findNotasByUserWithOutDirectory();
+		HomeListDTO dto = new HomeListDTO();
+		dto.setListDirectory(listDirectory);
+		dto.setListNotas(listNotas);
+		return dto;
+		
 	}
 	
 }

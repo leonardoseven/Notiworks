@@ -8,12 +8,8 @@
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #BBB;
-    cursor: pointer;
 }
 
-.container-directorys:hover{
-    background-color: #BBB;
-}
 
 
 .container-directorys h4, icon{

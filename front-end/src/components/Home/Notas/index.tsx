@@ -1,4 +1,4 @@
-import FolderIcon from "@mui/icons-material/Folder";
+import { useNavigate } from 'react-router'
 import './index.css'
 
 export type ListObject = {
@@ -13,13 +13,22 @@ interface IProps {
  }
 
 
-const Directory : React.FC<IProps>= (IProps) =>{
+const Notas : React.FC<IProps>= (IProps) =>{
+
+
+    const navigate = useNavigate();
+
+
+    const handleEditor = (notaId : number) =>{
+        navigate("/editor", { state:{notaId : notaId}})
+    }
+
 
     return(
         <>
         {IProps.list.map(item =>
             <>
-                <div className="container-directorys" key={item.id}>
+                <div  onClick={() =>handleEditor(item.id)} className="container-directorys" key={item.id}>
                     <div className="container-icon">
                         <div className="icon">
                             {IProps.icon}
@@ -38,4 +47,4 @@ const Directory : React.FC<IProps>= (IProps) =>{
 
 }
 
-export default Directory;
+export default Notas;

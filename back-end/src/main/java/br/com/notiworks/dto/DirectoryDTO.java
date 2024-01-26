@@ -14,5 +14,6 @@ public class DirectoryDTO {
 	private Long id;
 	private Long paiId;
 	private String nome;
+	private String dtAtualizacao;
 	
 }
