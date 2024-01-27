@@ -47,6 +47,8 @@ public class WebSecurityConfig{
 	        .authorizeRequests()
 	        .requestMatchers("/api/v1/auth/").permitAll()
 	        .requestMatchers("/api/v1/recovery/password/").permitAll()
+	        .requestMatchers("/upload/images").permitAll()
+	        .requestMatchers("/images").permitAll()
 	        // Outras configurações...
 	        .and()
 	        .sessionManagement()

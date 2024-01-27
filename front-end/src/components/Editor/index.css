@@ -2,3 +2,9 @@
     display: flex;
     justify-content: flex-start;
 }
+
+.container-editor-text{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
