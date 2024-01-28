@@ -56,6 +56,10 @@ public class NotasService {
 	public Notas findById(String notaId) {
 		return iNotaRepository.findById(Long.valueOf(notaId)).get();
 	}
+
+	public List<NotasDTO> findNotasByUserWithDirectory(Long directoryFatherId) {
+		return notasDAO.findNotasByUserWithDirectory(directoryFatherId);
+	}
 	
 	
 	

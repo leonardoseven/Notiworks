@@ -34,7 +34,9 @@ const Editor = () =>{
         axios.get('http://localhost/api/v1/notas/'+notaId,config)
         .then((response)=>{
             if(response.data?.conteudo != null){
-               ref.current?.setMarkdown(response.data?.conteudo)
+               console.log(ref.current?.getMarkdown())
+               ref.current?.setMarkdown(response.data?.conteudo.replace("\\", ""))
+               
             }
             setTitle(response.data?.nome)
 
@@ -79,6 +81,7 @@ const Editor = () =>{
                 if(notas != null && notas != undefined){
                   if(notas.length >= 5){
                     console.log("Plano gratuito são apenas 5 abas apertas")
+
                   }else{
                       let nota = {id : response.data.id, nome : response.data.titulo}
                       notas.concat(JSON.stringify(nota))
@@ -115,14 +118,14 @@ const Editor = () =>{
                     </div>
                     <MDXEditor
                         ref={ref}
-                        markdown=""
+                        markdown={markdownValue}
                         onChange={setMarkdownValue}
                         onError={console.log}
                         plugins={[ headingsPlugin(), listsPlugin(), quotePlugin(), thematicBreakPlugin(),imagePlugin({ imageUploadHandler }),linkDialogPlugin(),diffSourcePlugin(),frontmatterPlugin(),tablePlugin(),
                             toolbarPlugin({
                             toolbarContents: () => (
                                 <>
-                                {' '}
+                                {}
                                 <UndoRedo />
                                 <BoldItalicUnderlineToggles />
                                 <BlockTypeSelect/>

@@ -96,7 +96,41 @@ public class DirectoryDAO {
 			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 			List<DirectoryDTO> listDTO = new ArrayList<DirectoryDTO>();
 			while(rs.next()) {
-				DirectoryDTO directory = new DirectoryDTO(rs.getString("nome_diretorio"), rs.getLong("id"), null);
+				DirectoryDTO directory = new DirectoryDTO(rs.getString("nome_diretorio"), rs.getLong("id"), 0L);
+				Date date = new Date(rs.getTimestamp("data_atualizacao").getTime());
+				directory.setDtAtualizacao(formato.format(date));
+				listDTO.add(directory);
+			}
+			return listDTO;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public List<DirectoryDTO> findByUserIdByPaiId(Long directoryFatherId) {
+		try {
+			Connection con = connectionDB.getConnection();
+			
+			StringBuilder sql= new StringBuilder();
+			sql.append("select d.id, d.nome_diretorio,d.diretorio_pai_id,d.data_atualizacao " );
+			sql.append("from tbdirectory d " );
+			sql.append("inner join tbdirectoryxnotas dn on d.id = dn.id_directory " );
+			sql.append("inner join tbnotas n on n.id = dn.id_nota " );
+			sql.append("inner join tbnotasxuser nu on nu.id_nota = n.id " );
+			sql.append("inner join tbuser u on u.id = nu.id_user " );
+			sql.append("where u.id = ? and d.diretorio_pai_id = ? " );
+			sql.append("group by d.id order by d.data_atualizacao desc");
+			
+			PreparedStatement stm = con.prepareStatement(sql.toString());
+			stm.setLong(1, usuarioLogado.getId());
+			stm.setLong(2, directoryFatherId);
+			
+			ResultSet rs = stm.executeQuery();
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			List<DirectoryDTO> listDTO = new ArrayList<DirectoryDTO>();
+			while(rs.next()) {
+				DirectoryDTO directory = new DirectoryDTO(rs.getString("nome_diretorio"), rs.getLong("id"), directoryFatherId);
 				Date date = new Date(rs.getTimestamp("data_atualizacao").getTime());
 				directory.setDtAtualizacao(formato.format(date));
 				listDTO.add(directory);

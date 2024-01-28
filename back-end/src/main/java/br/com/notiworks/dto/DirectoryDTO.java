@@ -5,14 +5,14 @@ import lombok.Data;
 @Data
 public class DirectoryDTO {
 
-	public DirectoryDTO(String nome, Long id, Long paiId) {
+	public DirectoryDTO(String nome, Long id, Long directoryFatherId) {
 		this.id = id;
 		this.nome = nome;
-		this.paiId = paiId;
+		this.directoryFatherId = directoryFatherId;
 	}
 	
 	private Long id;
-	private Long paiId;
+	private Long directoryFatherId;
 	private String nome;
 	private String dtAtualizacao;
 	

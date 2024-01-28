@@ -170,9 +170,9 @@ const Home = () =>{
                                             </div>
 
                                             <div className="moda-container-directorys">
-                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter={filter} search={search}/>
-                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter={filter} search={search}/>
-                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter={filter} search={search}/>
+                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter={filter} search={search} directoryFatherId={-1} />
+                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter={filter} search={search} directoryFatherId={-1}/>
+                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter={filter} search={search} directoryFatherId={-1}/>
                                             </div> 
                                                 
 
@@ -209,7 +209,7 @@ const Home = () =>{
                             <h4>Última alteração</h4>
                         </div>
                         <div className="container-directory-notas">
-                            <Directory list={listDirectory} icon={<FolderIcon fontSize="small"/>} filter={filter} search={search}/>
+                            <Directory list={listDirectory} icon={<FolderIcon fontSize="small"/>} filter={filter} search={search} directoryFatherId={-1}/>
                             <Notas list={listNotas} icon={<DescriptionIcon fontSize="small"/>} filter={filter} search={search} />
                         </div>
                     </div>

@@ -35,7 +35,7 @@ public class DirectoryService {
 			Directory direct = new Directory();
 			direct.setNome(dto.getNome());
 			direct.setId(dto.getId());
-			direct.setDiretorioPaiId(dto.getPaiId());
+			direct.setDiretorioPaiId(dto.getDirectoryFatherId());
 			LocalDateTime now = LocalDateTime.now();
 			direct.setData_atualizacao(now);
 			direct.setData_insercao(now);
@@ -66,6 +66,15 @@ public class DirectoryService {
 		dto.setListNotas(listNotas);
 		return dto;
 		
+	}
+
+	public HomeListDTO listByFatherId(Long directoryFatherId) {
+		List<DirectoryDTO> listDirectory = directoryDAO.findByUserIdByPaiId(directoryFatherId);
+		List<NotasDTO> listNotas = notasService.findNotasByUserWithDirectory(directoryFatherId);
+		HomeListDTO dto = new HomeListDTO();
+		dto.setListDirectory(listDirectory);
+		dto.setListNotas(listNotas);
+		return dto;
 	}
 	
 }
