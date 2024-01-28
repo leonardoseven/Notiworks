@@ -1,36 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import '../css/index-configuration.css';
 
-interface IProps {
-  activeIcon: string;
-}
+const LeftBarConfiguration: React.FC = () => {
+  const location = useLocation();
+  const activeRoute = location.pathname.split('/')[1];
 
-const LeftBarConfiguration: React.FC<IProps> = ({ activeIcon }) => {
   return (
     <div className='container-left-bar1'>
       <div className='sub-container-left-bar1'>
         <nav>
           <div className='menu-item1'>
-            <Link to='/configuracoes' className={'label ' + (activeIcon === 'configuracoes' ? 'active' : '')}>
+            <Link to='/configuracoes' className={'label ' + (activeRoute === 'configuracoes' ? 'active' : '')}>
               Perfil
             </Link>
           </div>
 
           <div className='menu-item1'>
-            <Link to='/lembrete' className={'label ' + (activeIcon === 'lembrete' ? 'active' : '')}>
+            <Link to='/lembrete' className={'label ' + (activeRoute === 'lembrete' ? 'active' : '')}>
               Lembretes
             </Link>
           </div>
 
           <div className='menu-item1'>
-            <Link to='/contatos' className={'label ' + (activeIcon === 'contatos' ? 'active' : '')}>
+            <Link to='/editorNotas' className={'label ' + (activeRoute === 'editorNotas' ? 'active' : '')}>
               Editor de Notas
             </Link>
           </div>
 
           <div className='menu-item1'>
-            <Link to='/lembretes' className={'label1 ' + (activeIcon === 'lembretes' ? 'active' : '')}>
+            <Link to='/assinatura' className={'label1 ' + (activeRoute === 'assinatura' ? 'active' : '')}>
               Assinatura
             </Link>
           </div>

@@ -1,5 +1,11 @@
-import LeftBar from "../LeftBar/Index"
+import LeftBar from "../LeftBar/Index";
 import './index.css'
+import ContatoComponents from "./ContatoComponents";
+import ContatoVazio from "./ContatoVazio";
+import ModalContato from "./components/ModalContato";
+
+
+
 
 const Contatos = () =>{
 
@@ -7,7 +13,9 @@ const Contatos = () =>{
         <>
             <div className="container-contatos">
                 <LeftBar activeIcon="contatos"></LeftBar>
-                <h1>Contatos</h1>
+                <ContatoComponents/>
+                <ModalContato/>
+              
             </div>
         </>
     )
