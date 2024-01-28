@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
-import './SearchBar.css'; // Certifique-se de importar o arquivo CSS
+import '../SearchBar.css'; // Certifique-se de importar o arquivo CSS
 
 const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState('');
