@@ -87,7 +87,7 @@ public class DirectoryDAO {
 			sql.append("inner join tbnotasxuser nu on nu.id_nota = n.id " );
 			sql.append("inner join tbuser u on u.id = nu.id_user " );
 			sql.append("where u.id = ? and d.diretorio_pai_id is null " );
-			sql.append("group by d.id");
+			sql.append("group by d.id order by d.data_atualizacao desc");
 			
 			PreparedStatement stm = con.prepareStatement(sql.toString());
 			stm.setLong(1, usuarioLogado.getId());

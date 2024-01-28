@@ -10,14 +10,20 @@ export type ListObject = {
 interface IProps {
     list: ListObject[]
     icon: any
+    filter: string
+    search: string
  }
 
 
 const Directory : React.FC<IProps>= (IProps) =>{
 
+    const searchList = IProps.list.filter((item) =>
+        item.nome.toLowerCase().includes(IProps.search.toLowerCase()) || item.dtAtualizacao.toLowerCase().includes(IProps.search.toLowerCase()) 
+    );
+
     return(
         <>
-        {IProps.list.map(item =>
+        {searchList.map(item =>
             <>
                 <div className="container-directorys" key={item.id}>
                     <div className="container-icon">

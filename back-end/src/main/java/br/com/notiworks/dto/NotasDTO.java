@@ -10,5 +10,7 @@ public class NotasDTO {
 	
 	private String nome;
 	
+	private String conteudo;
+	
 	private String dtAtualizacao;
 }

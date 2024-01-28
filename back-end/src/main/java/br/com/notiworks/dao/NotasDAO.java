@@ -37,7 +37,7 @@ public class NotasDAO {
 			sql.append("left join tbdirectoryxnotas dn on n.id = dn.id_nota " );
 			sql.append("inner join tbnotasxuser nu on nu.id_nota = n.id " );
 			sql.append("inner join tbuser u on u.id = nu.id_user " );
-			sql.append("where u.id = ? and dn.id_nota is null " );
+			sql.append("where u.id = ? and dn.id_nota is null  order by n.data_atualizacao desc" );
 			
 			PreparedStatement stm = con.prepareStatement(sql.toString());
 			stm.setLong(1, usuarioLogado.getId());

@@ -11,6 +11,7 @@ import axios from 'axios';
 import FolderIcon from "@mui/icons-material/Folder";
 import DescriptionIcon from '@mui/icons-material/Description';
 import './index.css'
+import OpenTabs from "../OpenTabs";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -47,6 +48,9 @@ const Home = () =>{
     const [listDirectory, setListDirectory] = useState([])
     const [listNotas, setListNotas] = useState([])
 
+    //pesquisa
+    const [search, setSearch] = useState('')
+    const [filter, setfilter] = useState('')
 
     const listAllDirectory = () =>{
         let config = {
@@ -108,14 +112,7 @@ const Home = () =>{
             <div className="container-home">
                 <LeftBar activeIcon="home" />
                 <div className="home">
-                    <div className="container-open-notes">
-                        <div className="open-note">
-                            <button>Nota B</button> <span>X</span>    
-                        </div>
-                        <div className="open-note">
-                            <button>Boas-vindas da Notiworks! </button> <span>X</span>
-                        </div>
-                    </div>
+                   <OpenTabs />
                     <div className="header-menu">
                         <div className="title">
                             <HomeIcon  fontSize="large"/>
@@ -151,9 +148,9 @@ const Home = () =>{
                                             </div>
 
                                             <div className="moda-container-directorys">
-                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>}/>
-                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>}/>
-                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>}/>
+                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter={filter} search={search}/>
+                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter={filter} search={search}/>
+                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter={filter} search={search}/>
                                             </div> 
                                                 
 
@@ -171,8 +168,8 @@ const Home = () =>{
                         </div>
                     </div>
                     <div className="header-menu-filter">
-                        <input className="pesquisar" placeholder="pesquisar"></input>
-                        <input className="filtrar"placeholder="filtrar"></input>
+                        <input onChange={(e) =>{setSearch(e.target.value)}} className="pesquisar" placeholder="pesquisar"></input>
+                        <input  onChange={(e) =>{setfilter(e.target.value)}}  className="filtrar"placeholder="filtrar"></input>
                     </div>
 
                     <div className="container-recent-used">
@@ -190,8 +187,8 @@ const Home = () =>{
                             <h4>Última alteração</h4>
                         </div>
                         <div className="container-directory-notas">
-                            <Directory list={listDirectory} icon={<FolderIcon fontSize="small"/>}/>
-                            <Notas list={listNotas} icon={<DescriptionIcon fontSize="small"/>}/>
+                            <Directory list={listDirectory} icon={<FolderIcon fontSize="small"/>} filter={filter} search={search}/>
+                            <Notas list={listNotas} icon={<DescriptionIcon fontSize="small"/>} filter={filter} search={search} />
                         </div>
                     </div>
                 </div>

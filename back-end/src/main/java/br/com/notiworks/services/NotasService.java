@@ -2,6 +2,7 @@ package br.com.notiworks.services;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class NotasService {
 	private NotasXUserService notasXUserService;
 	
 	
-	public void saveNotas(NotaDTO notaDTO) {
+	public Notas saveNotas(NotaDTO notaDTO) {
 		Notas notas = new Notas();
 		BeanUtils.copyProperties(notaDTO, notas);
 		LocalDateTime now = LocalDateTime.now();
@@ -38,10 +39,21 @@ public class NotasService {
 		Notas nota = iNotaRepository.save(notas);
 		notasXUserService.saveNotasXUser(nota);
 		directoryService.saveDirectory(nota.getId(), notaDTO.getDirectoryName(), notaDTO.getDirectoryId(), notaDTO.getDirectoryFatherId());
+		return nota;
 	}
 
 	public List<NotasDTO> findNotasByUserWithOutDirectory() {
 		return notasDAO.findNotasByUserWithOutDirectory();
+	}
+
+	public void saveConteudoNota(String notaId, String conteudo) {
+		Notas nota = iNotaRepository.findById(Long.valueOf(notaId)).get();
+		nota.setConteudo(conteudo);
+		iNotaRepository.save(nota);
+	}
+
+	public Notas findById(String notaId) {
+		return iNotaRepository.findById(Long.valueOf(notaId)).get();
 	}
 	
 	

@@ -8,3 +8,28 @@
     display: flex;
     flex-direction: column;
 }
+
+._toolbarRoot_11eqz_145{
+    background-color: #FFF !important;
+}
+
+._selectTrigger_11eqz_281{
+    border: 1px solid #DDD !important;
+}
+
+._rootContentEditableWrapper_11eqz_1047{
+    display: flex !important;
+    justify-content: center !important;
+}
+
+._contentEditable_11eqz_352{
+    width: 70% !important;
+}
+
+.container-editor-title{
+    padding: 0px;
+    margin-bottom: 0px;
+    margin-left: 30px;
+    font-size: 40px;
+    color: #888;
+}
