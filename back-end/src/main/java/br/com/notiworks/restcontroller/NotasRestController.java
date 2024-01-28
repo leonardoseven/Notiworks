@@ -35,13 +35,13 @@ public class NotasRestController {
 	}
 	
 	@PostMapping("/save/{notaId:.+}")
-	public ResponseEntity<String> save(@PathVariable(value="notaId") String notaId, @RequestBody ConteudoDTO dto){
+	public ResponseEntity<Notas> save(@PathVariable(value="notaId") String notaId, @RequestBody ConteudoDTO dto){
 		try {
-			notasService.saveConteudoNota(notaId, dto.getConteudo());
-			return new ResponseEntity<String>("", HttpStatus.OK);
+			Notas saveConteudoNota = notasService.saveConteudoNota(notaId, dto.getConteudo());
+			return new ResponseEntity<Notas>(saveConteudoNota, HttpStatus.OK);
 		}catch(Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Notas>(new Notas(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

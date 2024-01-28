@@ -75,6 +75,20 @@ const Editor = () =>{
                     vertical: "top",
                     horizontal: "center",
                 }});
+                var notas = localStorage.getItem("open-tabs");
+                if(notas != null && notas != undefined){
+                  if(notas.length >= 5){
+                    console.log("Plano gratuito são apenas 5 abas apertas")
+                  }else{
+                      let nota = {id : response.data.id, nome : response.data.titulo}
+                      notas.concat(JSON.stringify(nota))
+                      localStorage.setItem("open-tabs", notas)
+                  }
+                }else{
+                      let nota = [{id : response.data.id, nome : response.data.titulo}]                    
+                      localStorage.setItem("open-tabs", JSON.stringify(nota))
+                }
+  
             })
             .catch((error)=>{
                 alert("error")
@@ -95,7 +109,7 @@ const Editor = () =>{
                 <LeftBar activeIcon="editor"></LeftBar>
                 
                 <div className="container-editor-text">
-                    <OpenTabs/>
+                    <OpenTabs active={location.state.notaId}/>
                     <div>
                         <h1 className="container-editor-title">{title}</h1>
                     </div>

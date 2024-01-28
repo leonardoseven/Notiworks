@@ -7,36 +7,6 @@
     width: -webkit-fill-available;
 }
 
-.container-open-notes{
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-    background-color: #EEEEEE;
-    padding-top: 8px;
-}
-.open-note{
-    border: 1px solid #BBB;
-    height: 20px;
-    border-bottom: none;
-    border-radius: 3px;
-    padding: 3px;
-    margin-right: 5px;
-    background-color: #EEEEEE;
-}
-
-.container-open-notes button{
-    min-width: 200px;
-    text-align: left;
-    background-color: EEEEEE;
-    border: none;
-}
-
-.container-open-notes button span{
-    display: flex;
-    justify-content: flex-end;
-    text-align: right;
-}
-
 .header-menu{
     display: flex;
     justify-content: space-between;
@@ -143,5 +113,5 @@
 
 .container-directory-notas{
     max-height: 495px;
-    overflow: scroll;
+    overflow-y: scroll;
 }

@@ -12,6 +12,7 @@ import FolderIcon from "@mui/icons-material/Folder";
 import DescriptionIcon from '@mui/icons-material/Description';
 import './index.css'
 import OpenTabs from "../OpenTabs";
+import { useSnackbar } from "notistack";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -35,6 +36,8 @@ export type ListObject = {
 
 
 const Home = () =>{
+
+    const { enqueueSnackbar } = useSnackbar();
 
     //modal
     const [open, setOpen] = useState(false);
@@ -75,11 +78,6 @@ const Home = () =>{
         listAllDirectory();
     },[])
 
-
-
-
-
-
     const salvarNota = (e : any) =>{
         e.preventDefault()
 
@@ -95,10 +93,34 @@ const Home = () =>{
             setModalPesquisa('');
             setOpen(false);
             listAllDirectory();
-            alert("salvo")
+            enqueueSnackbar("Nota salva com sucesso",{variant: 'success', anchorOrigin: {
+                vertical: "top",
+                horizontal: "center",
+              }});
+              var notas = localStorage.getItem("open-tabs");
+              if(notas != null && notas != undefined){
+                if(notas.length >= 5){
+                    enqueueSnackbar("Plano gratuito são apenas 5 abas apertas",{variant: 'warning', anchorOrigin: {
+                        vertical: "top",
+                        horizontal: "center",
+                      }});
+                }else{
+                    let nota = {id : response.data.id, nome : response.data.titulo}
+                    notas.concat(JSON.stringify(nota))
+                    localStorage.setItem("open-tabs", notas)
+                }
+              }else{
+                    let nota = [{id : response.data.id, nome : response.data.titulo}]                    
+                    localStorage.setItem("open-tabs", JSON.stringify(nota))
+              }
+
         })
         .catch((error)=>{
-            alert("error")
+            enqueueSnackbar("Ocorreu um erro inesperado ao salvar.",{variant: 'error', anchorOrigin: {
+                vertical: "top",
+                horizontal: "center",
+              }});
+              console.log(error)
         })
     }
 
@@ -112,7 +134,7 @@ const Home = () =>{
             <div className="container-home">
                 <LeftBar activeIcon="home" />
                 <div className="home">
-                   <OpenTabs />
+                   <OpenTabs active={0}/>
                     <div className="header-menu">
                         <div className="title">
                             <HomeIcon  fontSize="large"/>

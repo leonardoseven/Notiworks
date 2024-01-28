@@ -46,10 +46,11 @@ public class NotasService {
 		return notasDAO.findNotasByUserWithOutDirectory();
 	}
 
-	public void saveConteudoNota(String notaId, String conteudo) {
+	public Notas saveConteudoNota(String notaId, String conteudo) {
 		Notas nota = iNotaRepository.findById(Long.valueOf(notaId)).get();
 		nota.setConteudo(conteudo);
 		iNotaRepository.save(nota);
+		return nota;
 	}
 
 	public Notas findById(String notaId) {

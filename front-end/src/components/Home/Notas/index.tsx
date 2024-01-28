@@ -5,7 +5,6 @@ export type ListObject = {
     id : number
     nome: string
     dtAtualizacao : string
-
 }
 
 interface IProps {

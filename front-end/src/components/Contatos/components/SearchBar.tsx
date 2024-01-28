@@ -5,12 +5,11 @@ import '../SearchBar.css'; // Certifique-se de importar o arquivo CSS
 const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
-    const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value);
+    const handleSearchChange = () => {
+        
     }
 
-    const handleSearchSubmit = (event) => {
-        event.preventDefault();
+    const handleSearchSubmit = () => {
         console.log(`Pesquisando por: ${searchTerm}`);
     }
 
@@ -21,7 +20,7 @@ const SearchBar = () => {
                     type="text" 
                     placeholder="Pesquisar..." 
                     value={searchTerm} 
-                    onChange={handleSearchChange} 
+                    onChange={(e) =>setSearchTerm(e.target.value)} 
                     className="search-input"
                 />
                 <SearchIcon className="search-icon" />
