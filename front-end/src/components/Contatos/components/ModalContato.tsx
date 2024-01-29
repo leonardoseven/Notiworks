@@ -14,8 +14,8 @@ const ModalContato = () => {
   const contato = { nome: 'Contato 2', email: 'contato2@gmail.com', color: 'blue' };
 
   return (
-    <div className="container-open-notes" style={{borderBottom: '1px solid gray',width:'100%', borderRadius: '15px'}}>
-      <div style={{ padding: '40px', textAlign: 'center', borderLeft: '1px solid gray', marginTop:'27px',height: '800px',borderTop: '1px solid gray'}}>
+    <div style={{ backgroundColor: "#F9F9F9"}}>
+      <div style={{ padding: '40px', textAlign: 'center', borderLeft: '1px solid #BBB',height: '700px',borderTop: '1px solid #BBb'}}>
         <div style={{ display: 'flex', textAlign:'start', marginBottom: '5px' }}>
           <Avatar style={{width:'75px',height:'75px',marginLeft:'30px', backgroundColor: contato.color}}>{contato.nome.charAt(0)}</Avatar>
           <div style={{ marginLeft: '15px', marginTop:'15px' }}>

@@ -62,4 +62,20 @@ create table tbnotasxuser(
 Alter table tbnotasxuser add constraint fk_tbnotasxuser foreign key (id_nota) References tbnotas (id);
 Alter table tbnotasxuser add constraint fk_tbnotasxuser_u foreign key (id_user) References tbuser (id);
 
+create table tbcontatos(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	nome varchar(255),
+	email varchar(255),
+    data_insercao timestamp not null,
+    data_atualizacao timestamp not null
+);
+
+create table tbcontatosxuser(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	id_user integer,
+	id_contato integer
+);
+
+Alter table tbcontatosxuser add constraint fk_tbcontatosxuser foreign key (id_contato) References tbcontatos (id);
+Alter table tbcontatosxuser add constraint fk_tbcontatosxuser_u foreign key (id_user) References tbuser (id);
 

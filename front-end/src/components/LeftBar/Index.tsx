@@ -39,11 +39,8 @@ const LeftBar : React.FC<IProps>= ({activeIcon}) =>{
                         </div>
 
                         <div className={'menu-item '+(activeIcon === "editor" ? 'active':"")}>
-                            <Link to="/editor">
-                                <EditNoteIcon />   
-                            </Link>
-                            <Link to="/editor" className='label'>Editor</Link>
-                            
+                            <EditNoteIcon />   
+                            <label  className='label'>Editor</label>
                         </div>
 
                         <div className={'menu-item '+(activeIcon === "contatos" ? 'active':"")}>

@@ -10,6 +10,8 @@ import SearchBar from './components/SearchBar'; // Certifique-se de importar o c
 import Contatos from "./Contatos";
 import ContatoVazio from "./ContatoVazio";
 import { Button, TextField } from "@mui/material";
+import { useSnackbar } from "notistack";
+
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -26,6 +28,9 @@ const style = {
 
 const ContatoComponents = () =>{
 
+  const { enqueueSnackbar } = useSnackbar();
+
+
  //modal
  const [open, setOpen] = useState(false);
  const [nome, setNome] = useState('');
@@ -34,9 +39,7 @@ const ContatoComponents = () =>{
  const handleOpen = () => setOpen(true);
  const handleClose = () => setOpen(false);
  //criar nota
- const [nota, setNota] = useState('')
-
- const salvarNota = (e : any) =>{
+ const salvarContato = (e : any) =>{
      e.preventDefault()
 
      let config = {
@@ -45,14 +48,21 @@ const ContatoComponents = () =>{
            'Authorization':`Bearer ${sessionStorage.getItem("token")}`
            }
          }
-     axios.post('http://localhost/api/v1/notas/save', {titulo:nota, directoryName:'', directoryId:''}, config)
+     axios.post('http://localhost/api/v1/contatos/save', {nome:nome, email:email}, config)
      .then((response)=>{
-         setNota('');
-         setOpen(false);
-         alert("salvo")
+        enqueueSnackbar("Nota salva com sucesso",{variant: 'success', anchorOrigin: {
+          vertical: "top",
+          horizontal: "center",
+        }});
+        setNome('')
+        setEmail('')
+
      })
      .catch((error)=>{
-         alert("error")
+        enqueueSnackbar("Ocorreu um erro inexperado",{variant: 'error', anchorOrigin: {
+          vertical: "top",
+          horizontal: "center",
+        }});
      })
  }
 
@@ -60,14 +70,6 @@ const ContatoComponents = () =>{
      <>
          <div className="container-home" style={{width: '100%', backgroundColor: 'background.paper'}}>
              <div className="home" style={{width: '100%',marginLeft:'10px'}}>
-                 <div className="container-open-notes" style={{borderBottom: '1px solid gray',width:'100%'}}>
-                     <div className="open-note">
-                         <button>Nota B</button> <span>X</span>    
-                     </div>
-                     <div className="open-note">
-                         <button>Boas-vindas da Notiworks! </button> <span>X</span>
-                     </div>
-                 </div>
                  <div className="header-menu" style={{width: '99%'}}>
                      <div className="title">
                      <Person fontSize="large" htmlColor="lightgray" />
@@ -76,59 +78,59 @@ const ContatoComponents = () =>{
                      <div className="container-btn-new-notas">
                      <button onClick={handleOpen} className="btn-new-notas" style={{width: '150px'}}>+ Nova Consulta</button>
                      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={{ 
-          position: 'absolute', 
-          top: '50%', 
-          left: '50%', 
-          transform: 'translate(-50%, -50%)', 
-          width: 400, 
-          height: 700, 
-          bgcolor: 'background.paper', 
-          boxShadow: 24, 
-          p: 4, 
-          display: 'flex', 
-          flexDirection: 'column' 
-        }}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ fontWeight: 'bold' }}>
-              Novo Contato
-            </Typography>
-            <Button onClick={handleClose}><Close sx={{ color: 'black' }}/></Button>
-          </Box>
-          <hr style={{width:'460px',marginLeft:'-30px',background:'black'}}></hr>
-          <Typography id="modal-modal-description" sx={{ mt: 2, flexGrow: 1 }}>
-            <h5>Nome</h5>
-            <TextField 
-              fullWidth 
-              id="nome" 
-              variant="outlined" 
-              value={nome} 
-              onChange={(e) => setNome(e.target.value)} 
-              placeholder="Placeholder" 
-            />
-            <h5>E-mail</h5>
-            <TextField
-              fullWidth 
-              id="email" 
-              variant="outlined" 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
-              placeholder="meuemail@email.com" 
-            />
-          </Typography>
-          <hr/>
-          <hr style={{width:'460px',marginLeft:'-30px',background:'black'}}></hr>
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', pt: 2 }}>
-            <Button variant="outlined" sx={{ mr: 1 }}>Cancelar</Button>
-            <Button variant="contained" color="primary">Criar Notificação</Button>
-          </Box>
-        </Box>
-      </Modal>
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                          >
+                            <Box sx={{ 
+                              position: 'absolute', 
+                              top: '50%', 
+                              left: '50%', 
+                              transform: 'translate(-50%, -50%)', 
+                              width: 400, 
+                              height: 700, 
+                              bgcolor: 'background.paper', 
+                              boxShadow: 24, 
+                              p: 4, 
+                              display: 'flex', 
+                              flexDirection: 'column' 
+                            }}>
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ fontWeight: 'bold' }}>
+                                  Novo Contato
+                                </Typography>
+                                <Button onClick={handleClose}><Close sx={{ color: 'black' }}/></Button>
+                              </Box>
+                              <hr style={{width:'460px',marginLeft:'-30px',background:'black'}}></hr>
+                              <Typography id="modal-modal-description" sx={{ mt: 2, flexGrow: 1 }}>
+                                <h5>Nome</h5>
+                                <TextField 
+                                  fullWidth 
+                                  id="nome" 
+                                  variant="outlined" 
+                                  value={nome} 
+                                  onChange={(e) => setNome(e.target.value)} 
+                                  placeholder="Placeholder" 
+                                />
+                                <h5>E-mail</h5>
+                                <TextField
+                                  fullWidth 
+                                  id="email" 
+                                  variant="outlined" 
+                                  value={email} 
+                                  onChange={(e) => setEmail(e.target.value)} 
+                                  placeholder="meuemail@email.com" 
+                                />
+                              </Typography>
+                              <hr/>
+                              <hr style={{width:'460px',marginLeft:'-30px',background:'black'}}></hr>
+                              <Box sx={{ display: 'flex', justifyContent: 'flex-end', pt: 2 }}>
+                                <Button onClick={handleClose} variant="outlined" sx={{ mr: 1 }}>Cancelar</Button>
+                                <Button onClick={salvarContato} variant="contained" color="primary">Criar Contato</Button>
+                              </Box>
+                            </Box>
+                          </Modal>
                      </div>
                  </div>
                  <SearchBar /> {}

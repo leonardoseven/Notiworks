@@ -2,3 +2,10 @@
     display: flex;
     justify-content: flex-start;
 }
+.container-contatos-headers-1{
+    width: -webkit-fill-available;
+}
+
+.container-contatos-headers-2{
+    display: flex;
+}

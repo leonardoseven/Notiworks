@@ -149,9 +149,9 @@ const OpenTabs : React.FC<IProps>= (IProps) =>{
                                 </div>
 
                                 <div className="moda-container-directorys">
-                                    <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter="" search=""/>
-                                    <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter="" search=""/>
-                                    <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter="" search=""/>
+                                    <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter="" search="" directoryFatherId={-1}/>
+                                    <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter="" search=""  directoryFatherId={-1}/>
+                                    <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter="" search=""  directoryFatherId={-1}/>
                                 </div> 
                                     
 
