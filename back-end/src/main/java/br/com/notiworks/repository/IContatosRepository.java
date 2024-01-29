@@ -1,5 +1,7 @@
 package br.com.notiworks.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,4 +17,9 @@ public interface IContatosRepository extends JpaRepository<Contatos, Long>{
 	
 	@Query(value = "SELECT c.* from tbcontatos c where c.email = :email", nativeQuery = true)
 	Contatos findByUsername(@Param("email") String email);
+	
+	@Query(value = "SELECT c.* from tbcontatos c inner join tbcontatosxuser cu on cu.id_contato = c.id where cu.id_user = :userid ", nativeQuery = true)
+	List<Contatos> findByUserId( @Param("userid") Long id);
 }
+
+

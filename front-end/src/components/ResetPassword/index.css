@@ -1,0 +1,11 @@
+.container-ref-senha{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-ref-senha a{
+    border: 1px solid #BBB;
+    text-align: center;
+}

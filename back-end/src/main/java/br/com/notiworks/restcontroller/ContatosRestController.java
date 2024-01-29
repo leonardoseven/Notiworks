@@ -1,6 +1,5 @@
 package br.com.notiworks.restcontroller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.notiworks.dto.ContatosDTO;
+import br.com.notiworks.models.Contatos;
 import br.com.notiworks.services.ContatosService;
 
 @RestController
@@ -34,8 +34,8 @@ public class ContatosRestController {
 	
 	
 	@GetMapping("/list")
-	public ResponseEntity<List<ContatosDTO>> listByUser(){
-		List<ContatosDTO> list = contatosService.listByUser();
-		return new ResponseEntity<List<ContatosDTO>>(list, HttpStatus.OK);
+	public ResponseEntity<List<Contatos>> listByUser(){
+		List<Contatos> list = contatosService.listByUser();
+		return new ResponseEntity<List<Contatos>>(list, HttpStatus.OK);
 	}
 }

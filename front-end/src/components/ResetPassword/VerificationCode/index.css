@@ -1,6 +1,41 @@
+.container-verification-code{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container-verification-code p {
+    max-width: 330px;
+}
+
 .form{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.form-group-verification-code input{
+    line-height: 25px;
+    border-radius: 4px;
+    border: 1px solid #BBBBBB;
+    padding: 8px;
+    width: 300px;
+    margin-top: 15px;
+}
+
+.container-verification-code button{
+    margin-bottom: 20px;
+    line-height: 25px;
+    border-radius: 8px;
+    width: 300px;
+}
+
+
+.container-verification-code a{
+    border: 1px solid #BBB;
+    padding: 4px;
+    text-align: center;
+    width: 285px !important;
 }

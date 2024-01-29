@@ -56,8 +56,8 @@ public class ContatosService {
 		
 	}
 
-	public List<ContatosDTO> listByUser() {
-		return contatosDAO.findByUserId(usuarioLogado.getId());
+	public List<Contatos> listByUser() {
+		return contatosRepository.findByUserId(usuarioLogado.getId());
 	}
 	
 	

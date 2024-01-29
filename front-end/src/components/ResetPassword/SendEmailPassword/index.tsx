@@ -38,14 +38,14 @@ const SendEmailPassword = () =>{
         <>
             <Header />
             <div className="container-reset-senha">
-                <h1>Redifinição de senha</h1>
-                <h3>Informe seu e-mail:</h3>
+                <h1 style={{marginTop: '50px',marginBottom: '50px'}}>Redifinição de senha</h1>
+                <h3 style={{marginRight: '160px'}}> Informe seu e-mail:</h3>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group-reset-senha">
-                        <label>E-mail</label>
+                        <label style={{marginRight: '270px'}}>E-mail</label>
                         <input onChange={(e)=>setEmail(e.target.value)} type="email" placeholder="exemple@exemple.com"></input>
                     </div>
-                    <button className='btn-bottom'  type="submit">Enviar código por e-mail</button>
+                    <button className='btn-bottom btn-send'  type="submit">Enviar código por e-mail</button>
                 </form>
                 <Link className='btn-bottom' to="/login">Voltar a tela de Login</Link>
             </div>

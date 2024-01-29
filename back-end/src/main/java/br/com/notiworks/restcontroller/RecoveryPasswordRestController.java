@@ -5,10 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.notiworks.dto.AuthenticationRequest;
 import br.com.notiworks.dto.PinDTO;
 import br.com.notiworks.services.RecoveryPasswordService;
 
@@ -41,4 +44,16 @@ public class RecoveryPasswordRestController {
 		return new ResponseEntity<PinDTO>(pin, HttpStatus.BAD_REQUEST);
 	}
 	
+	@PostMapping("/reset")
+	public ResponseEntity<String> reset(@RequestBody AuthenticationRequest request){
+		
+		try {
+			recoveryPasswordService.saveNewPassword(request);
+			return new ResponseEntity<String>(HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+	}
 }

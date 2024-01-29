@@ -23,9 +23,16 @@
     margin-bottom: 20px;
     line-height: 25px;
     border-radius: 8px;
+    width: 300px;
+}
+.btn-send{
+    background-color: #0A6AC2;
+    color: white;
 }
 
 .container-reset-senha a{
     border: 1px solid #BBB;
     padding: 8px;
+    padding-left: 80px;
+    padding-right: 80px;
 }

@@ -50,7 +50,7 @@ const Login = () =>{
 
     return(
         <>
-            <h1 className='title'>Notiworks</h1>
+            <h1 className='title-login'>Notiworks</h1>
             <div className="login">
                 <div className="container">
                     <h3>Login</h3>

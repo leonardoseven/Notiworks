@@ -2,7 +2,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios';
 import './index.css'
 import { Close, Edit, EditOffOutlined, Person, TextureOutlined } from "@mui/icons-material";
@@ -26,6 +26,14 @@ const style = {
     p: 4,
 };
 
+
+export type ListObject = {
+  id : number
+  nome : string
+  email : string 
+}
+
+
 const ContatoComponents = () =>{
 
   const { enqueueSnackbar } = useSnackbar();
@@ -35,10 +43,37 @@ const ContatoComponents = () =>{
  const [open, setOpen] = useState(false);
  const [nome, setNome] = useState('');
  const [email, setEmail] = useState('');
+ const [contatos, setContatos] = useState<ListObject[]>([]);
 
  const handleOpen = () => setOpen(true);
  const handleClose = () => setOpen(false);
- //criar nota
+ 
+ 
+
+ useEffect(() =>{
+  listContato()
+ },[])
+ 
+ 
+ const listContato = () =>{
+          let config = {
+            headers: {
+              "Content-Type": "application/json",
+              'Authorization':`Bearer ${sessionStorage.getItem("token")}`
+              }
+            }
+        axios.get('http://localhost/api/v1/contatos/list', config)
+        .then((response)=>{
+            setContatos(response.data);
+        })
+        .catch((error)=>{
+          enqueueSnackbar("Ocorreu um erro inexperado",{variant: 'error', anchorOrigin: {
+            vertical: "top",
+            horizontal: "center",
+          }});
+        })
+ }
+ 
  const salvarContato = (e : any) =>{
      e.preventDefault()
 
@@ -50,16 +85,17 @@ const ContatoComponents = () =>{
          }
      axios.post('http://localhost/api/v1/contatos/save', {nome:nome, email:email}, config)
      .then((response)=>{
-        enqueueSnackbar("Nota salva com sucesso",{variant: 'success', anchorOrigin: {
+        enqueueSnackbar("Contato salvo com sucesso",{variant: 'success', anchorOrigin: {
           vertical: "top",
           horizontal: "center",
         }});
         setNome('')
         setEmail('')
-
+        setOpen(false);
+        listContato()
      })
      .catch((error)=>{
-        enqueueSnackbar("Ocorreu um erro inexperado",{variant: 'error', anchorOrigin: {
+        enqueueSnackbar(error.response.data.erroMsg,{variant: 'error', anchorOrigin: {
           vertical: "top",
           horizontal: "center",
         }});
@@ -133,9 +169,12 @@ const ContatoComponents = () =>{
                           </Modal>
                      </div>
                  </div>
-                 <SearchBar /> {}
-             <Contatos/>
-        
+                 <SearchBar />
+                 {contatos.map( contato => 
+                    <>
+                        <Contatos id={contato.id} nome={contato.nome} email={contato.email}/>            
+                    </>
+                  )}
              </div>
          </div>
      </>

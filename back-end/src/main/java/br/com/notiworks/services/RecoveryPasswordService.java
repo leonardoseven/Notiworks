@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import br.com.notiworks.dto.AuthenticationRequest;
 import br.com.notiworks.dto.EmailDTO;
 import br.com.notiworks.models.User;
 import br.com.notiworks.utils.GeneratePin;
@@ -37,5 +38,14 @@ public class RecoveryPasswordService {
 		User user = userService.findByUsername(email);
 		if(user == null) return false;
 		return true;
+	}
+
+	public void saveNewPassword(AuthenticationRequest request) throws Exception {
+		User user = userService.findByUsername(request.getEmail());
+		if(user == null)
+			throw new Exception("Usuário não encontrado.");
+		user.setPassword(request.getPassword());
+		userService.save(user);
+		
 	}
 }
