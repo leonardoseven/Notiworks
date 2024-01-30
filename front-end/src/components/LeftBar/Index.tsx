@@ -25,7 +25,7 @@ const LeftBar : React.FC<IProps>= ({activeIcon}) =>{
                 <div className='sub-container-left-bar'>
                     <div className='profile-avatar'>
                         <Avatar className="avatar-left-bar" alt="googlenpm run dev" src="https://i.pinimg.com/originals/1d/4d/69/1d4d69c694c8ba1034c0e9552f457ecf.jpg" /> 
-                        <span>{userAuthenticated.name}</span>
+                        <span style={{lineHeight:"40px"}}>{userAuthenticated.name}</span>
                     </div>
 
                     <nav>

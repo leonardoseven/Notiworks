@@ -13,6 +13,7 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import './index.css'
 import OpenTabs from "../OpenTabs";
 import { useSnackbar } from "notistack";
+import Directory2 from "./Directory2";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -80,14 +81,14 @@ const Home = () =>{
 
     const salvarNota = (e : any) =>{
         e.preventDefault()
-
+        var directoryId = localStorage.getItem("directory-to-save") != null && localStorage.getItem("directory-to-save") != undefined ? localStorage.getItem("directory-to-save") : "" 
         let config = {
             headers: {
               "Content-Type": "application/json",
               'Authorization':`Bearer ${sessionStorage.getItem("token")}`
               }
             }
-        axios.post('http://localhost/api/v1/notas/save', {titulo:nota, directoryName:modalPesquisa, directoryId:''}, config)
+        axios.post('http://localhost/api/v1/notas/save', {titulo:nota, directoryName:modalPesquisa, directoryId:directoryId}, config)
         .then((response)=>{
             setNota('');
             setModalPesquisa('');
@@ -122,6 +123,8 @@ const Home = () =>{
               }});
               console.log(error)
         })
+
+        localStorage.removeItem("directory-to-save")
     }
 
    
@@ -170,9 +173,7 @@ const Home = () =>{
                                             </div>
 
                                             <div className="moda-container-directorys">
-                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter={filter} search={search} directoryFatherId={-1} />
-                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter={filter} search={search} directoryFatherId={-1}/>
-                                                <Directory list={[]} icon={<FolderIcon fontSize="small"/>} filter={filter} search={search} directoryFatherId={-1}/>
+                                                  <Directory2 search={modalPesquisa} />
                                             </div> 
                                                 
 

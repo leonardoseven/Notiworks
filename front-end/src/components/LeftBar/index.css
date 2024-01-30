@@ -22,7 +22,6 @@ a{
 .profile-avatar{
     display: flex;
     justify-content: flex-start;
-    align-items: center;
     margin-bottom: 10px;
 }
 

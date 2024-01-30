@@ -9,7 +9,7 @@ const Configuracoes = () => {
     <div className="container-configuracoes">
       <AppBarConfiguration />
       <InferiorToolbarConfiguration/>
-      <LeftBarConfiguration activeIcon="configuracoes" />
+      <LeftBarConfiguration />
       <div className="container-content">
         <h1 className="h1-configuration">
           <PerfilConfiguration/>

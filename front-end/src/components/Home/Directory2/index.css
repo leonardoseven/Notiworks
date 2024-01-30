@@ -1,0 +1,38 @@
+
+.container-directorys{
+    background-color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 1px solid #BBB;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #BBB;
+    cursor: pointer;
+}
+
+.container-directorys:hover{
+    background-color: #BBB;
+}
+
+
+.container-directorys h4, icon{
+    padding:8px;
+    margin: 8px;
+}
+
+.container-icon{
+    display: flex;
+    justify-content: flex-start;
+
+}
+.icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.children{
+    margin-left: 40px;
+}

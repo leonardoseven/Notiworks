@@ -2,6 +2,7 @@ package br.com.notiworks.services;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,15 @@ public class DirectoryService {
 	public Directory saveDirectory(DirectoryDTO dto) {
 		if(!StringUtils.isEmpty(dto.getNome()) || !StringUtils.isEmpty(dto.getId())) {
 			Directory direct = new Directory();
-			direct.setNome(dto.getNome());
+			if(dto.getId() != null) {
+				Optional<Directory> directory = directoryRepository.findById(dto.getId());
+				if(directory != null)
+					direct.setNome(directory.get().getNome());
+				else
+					direct.setNome(dto.getNome());
+			}else
+				direct.setNome(dto.getNome());
+		
 			direct.setId(dto.getId());
 			direct.setDiretorioPaiId(dto.getDirectoryFatherId());
 			LocalDateTime now = LocalDateTime.now();
