@@ -1,14 +1,18 @@
 import LeftBar from "../LeftBar/Index"
+import Lembrete from "./Lembrete";
 import './index.css'
 
 
 const Lembretes = () =>{
 
+    
+
     return(
         <>
             <div className="container-lembretes">
                 <LeftBar activeIcon="lembretes"></LeftBar>
-                <h1>Lembretes</h1>
+                <Lembrete/> 
+               
             </div>
         </>
     )
