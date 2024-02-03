@@ -53,21 +53,6 @@ public class User implements Serializable, UserDetails{
 	
 	@Column(name="flpremium", nullable = false)
 	private int flpremium; 
-
-	
-//	    plataforma_auth_usuario varchar,
-//	    data_insercao_usuario date,
-//	    data_atualizacao_usuario date,
-//	    flpremium_usuario varchar,
-//	    nome_usuario varchar,
-//	    data_inicio_premium_usuario date,
-//	    data_final_premium_usuario date,
-//	    cargo_usuario varchar,
-//	    empresa_usuario varchar,
-//	    fk_telefone_usuario_telefone_usuario_PK integer,
-//	    chave varchar,
-//	    Usuario_TIPO INT
-	
 	
 	
 	@Override

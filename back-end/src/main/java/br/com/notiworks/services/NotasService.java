@@ -49,6 +49,7 @@ public class NotasService {
 	public Notas saveConteudoNota(String notaId, String conteudo) {
 		Notas nota = iNotaRepository.findById(Long.valueOf(notaId)).get();
 		nota.setConteudo(conteudo);
+		nota.setData_atualizacao(LocalDateTime.now());
 		iNotaRepository.save(nota);
 		return nota;
 	}
@@ -59,6 +60,10 @@ public class NotasService {
 
 	public List<NotasDTO> findNotasByUserWithDirectory(Long directoryFatherId) {
 		return notasDAO.findNotasByUserWithDirectory(directoryFatherId);
+	}
+
+	public List<NotasDTO> getRecentsNotes() {
+		return notasDAO.listRecentsNotes();
 	}
 	
 	

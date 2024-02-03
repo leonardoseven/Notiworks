@@ -1,19 +1,18 @@
 import ShareIcon from "@mui/icons-material/Share";
 import './index.css'
 
-const text = "Duas linhas do texto que compõe a nota. Sem formatação.Sendo exibidas, no máximo duas linhas...";
+interface IProps {
+   data: string
+   conteudo:string
+ }
 
-const getDate = () =>{
-    return <>{new Date().getDate()}</>
-}
-
-const RecentCard = () =>{
+const RecentCard : React.FC<IProps>= (IProps) =>{
 
     return(
         <>
             <div className="container-recent-card">
-                <p>{text}</p>
-                <p>{getDate()} <ShareIcon /></p>
+                <p>{IProps.conteudo}</p>
+                <p>{IProps.data} <ShareIcon /></p>
             </div>
 
         </>

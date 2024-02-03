@@ -94,5 +94,34 @@ public class NotasDAO {
 		}
 		return null;
 	}
+
+	public List<NotasDTO> listRecentsNotes() {
+		try {
+			Connection con = connectionDB.getConnection();
+			
+			StringBuilder sql= new StringBuilder();
+			
+			sql.append("select n.id, n.conteudo, n.data_atualizacao from tbnotas n inner join tbnotasxuser un on un.id_nota = n.id where un.id_user = ?  order by data_atualizacao desc limit 3 " );
+			
+			PreparedStatement stm = con.prepareStatement(sql.toString());
+			stm.setLong(1, usuarioLogado.getId());
+			
+			ResultSet rs = stm.executeQuery();
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			List<NotasDTO> listDTO = new ArrayList<NotasDTO>();
+			while(rs.next()) {
+				NotasDTO notas = new NotasDTO();
+				Date date = new Date(rs.getTimestamp("data_atualizacao").getTime());
+				notas.setId(rs.getLong("id"));
+				notas.setConteudo(rs.getString("conteudo"));
+				notas.setDtAtualizacao(formato.format(date));
+				listDTO.add(notas);
+			}
+			return listDTO;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 }

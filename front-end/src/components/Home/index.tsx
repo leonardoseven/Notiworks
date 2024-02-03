@@ -32,6 +32,7 @@ const style = {
 export type ListObject = {
     id : number
     nome: string
+    conteudo: string
     dtAtualizacao : string
 }
 
@@ -51,6 +52,8 @@ const Home = () =>{
 
     const [listDirectory, setListDirectory] = useState([])
     const [listNotas, setListNotas] = useState([])
+
+    const [listRecentNotes, setListRecentNotes] = useState<ListObject[]>([])
 
     //pesquisa
     const [search, setSearch] = useState('')
@@ -74,9 +77,26 @@ const Home = () =>{
         })
     }
 
+    const getListRecentNotes = () =>{
+        let config = {
+            headers: {
+              "Content-Type": "application/json",
+              'Authorization':`Bearer ${sessionStorage.getItem("token")}`
+              }
+            }
+        axios.get('http://localhost/api/v1/notas/recents',config)
+        .then((response)=>{
+            setListRecentNotes(response.data)
+        })
+        .catch((error)=>{
+            alert("error")
+        })
+    }
+
 
     useEffect(()=>{
         listAllDirectory();
+        getListRecentNotes();
     },[])
 
     const salvarNota = (e : any) =>{
@@ -198,9 +218,12 @@ const Home = () =>{
                     <div className="container-recent-used">
                         <h3>Usadas Recentemente</h3>
                         <div className="container-cards">
-                            <RecentCard />
-                            <RecentCard />
-                            <RecentCard />
+                            {listRecentNotes.map(item =>
+                                    <>
+                                        <RecentCard  data={item.dtAtualizacao} conteudo={item.conteudo}/>
+                                    </>
+                                )
+                            }
                         </div>
                     </div>
 

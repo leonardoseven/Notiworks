@@ -60,7 +60,7 @@ public class JwtAuthFilter  extends OncePerRequestFilter{
 				GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_ADMIN");
 		        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, jwtToken, Arrays.asList(authority));
 		        SecurityContextHolder.getContext().setAuthentication(auth);
-		        if(usuarioLogado.getId() == null) {
+		        if(usuarioLogado.getUsername() == null || !user.getUsername().equals(usuarioLogado.getUsername())) {
 		        	User u = userService.findByUsername(userEmail);
 		        	usuarioLogado.setId(u.getId());
 		        	usuarioLogado.setUsername(u.getUsername());

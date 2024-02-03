@@ -1,5 +1,7 @@
 package br.com.notiworks.restcontroller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,5 +61,12 @@ public class NotasRestController {
 			return new ResponseEntity<NotasDTO>(new NotasDTO(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@GetMapping("/recents")
+	public ResponseEntity<List<NotasDTO>> listRecents(){
+		List<NotasDTO> listNotas =  notasService.getRecentsNotes();
+		return new ResponseEntity<List<NotasDTO>>(listNotas, HttpStatus.OK);
+	}
+	
 	
 }
